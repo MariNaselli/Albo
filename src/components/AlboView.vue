@@ -1,21 +1,32 @@
 <template>
-    <div>
-      <div v-if="apiResponse">
-        <p>Fecha: {{ apiResponse.day }}/{{ apiResponse.month }}/{{ apiResponse.year }}</p>
-        <p>Número: {{ apiResponse.num }}</p>
-        <p>Título: {{ apiResponse.safe_title }}</p>
-        <hr>
-        <img :src="apiResponse.img" alt="Comic Image" width="300"  />
-        <button @click="fetchComic(apiResponse.num - 1)">Anterior</button>
-        <button @click="fetchComic(apiResponse.num + 1)">Siguiente</button>
-        
-      </div>
-      <div v-else>
-        Cargando...
-      </div>
-    </div>
+    <v-container fluid>
+      <v-row justify="center">
+        <v-col cols="12" sm="8" md="6">
+          <v-card>
+            <v-card-text>
+              <div v-if="apiResponse" style="text-align: center;">
+                <h2>{{ apiResponse.safe_title }}</h2>
+                <p>Fecha: {{ apiResponse.day }}/{{ apiResponse.month }}/{{ apiResponse.year }}</p>
+                <p>Número: {{ apiResponse.num }}</p>
+                <hr>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  <button @click="fetchComic(apiResponse.num - 1)">&#8249;</button>
+                  <img :src="apiResponse.img" alt="Comic Image" width="300" />
+                  <button @click="fetchComic(apiResponse.num + 1)">&#8250;</button>
+                </div>
+              </div>
+              <div v-else style="text-align: center;">
+                <p>Cargando...</p>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </template>
-
+  
+  
+  
 <script>
 import axios from "axios";
 
