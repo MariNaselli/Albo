@@ -1,4 +1,4 @@
-# albo holi
+# albo
 
 ## Project setup
 ```
