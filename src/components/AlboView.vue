@@ -1,19 +1,25 @@
 <template>
+  <v-app>
     <v-container fluid>
       <v-row justify="center">
         <v-col cols="12" sm="8" md="6">
-          <v-card>
-            <v-card-text>
-              <div v-if="apiResponse" style="text-align: center;">
-                <h2>{{ apiResponse.safe_title }}</h2>
-                <p>Fecha: {{ apiResponse.day }}/{{ apiResponse.month }}/{{ apiResponse.year }}</p>
-                <p>Número: {{ apiResponse.num }}</p>
-                <hr>
-                <div style="display: flex; align-items: center; justify-content: center;">
-                  <button @click="fetchComic(apiResponse.num - 1)">&#8249;</button>
+        <v-card>
+          <v-card-text>
+            <div v-if="apiResponse" style="text-align: center;">
+              <h2>{{ apiResponse.safe_title }}</h2>
+              <p>Fecha: {{ apiResponse.day }}/{{ apiResponse.month }}/{{ apiResponse.year }}</p>
+              <p>Número: {{ apiResponse.num }}</p>
+              <hr>
+                
+                <v-row align="center" justify="center">
+                  <v-btn @click="fetchComic(apiResponse.num - 1)" class="arrow-btn left" icon>
+                    <v-icon>mdi-chevron-left</v-icon>
+                  </v-btn>
                   <img :src="apiResponse.img" alt="Comic Image" width="300" />
-                  <button @click="fetchComic(apiResponse.num + 1)">&#8250;</button>
-                </div>
+                  <v-btn @click="fetchComic(apiResponse.num + 1)" class="arrow-btn right" icon>
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </v-row>
               </div>
               <div v-else style="text-align: center;">
                 <p>Cargando...</p>
@@ -23,10 +29,9 @@
         </v-col>
       </v-row>
     </v-container>
-  </template>
-  
-  
-  
+  </v-app>
+</template>
+
 <script>
 import axios from "axios";
 
@@ -53,7 +58,32 @@ export default {
     },
   },
 };
-
 </script>
 
-<style></style>
+<style>
+/* Puedes eliminar los estilos personalizados, ya que usaremos las clases de tipografía de Vuetify */
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.left {
+  left: 10px;
+  z-index: 1;
+}
+
+.right {
+  right: 10px;
+  z-index: 1;
+}
+</style>
+
+
+
